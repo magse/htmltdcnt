@@ -16,8 +16,3 @@ include_directories("${PROJECT_BINARY_DIR}")
 # add the executable
 add_executable(htmltdcnt htmltdcnt.cpp)
 
-# tests
-enable_testing()
-
-add_test(T1 htmltdcnt -V)
-

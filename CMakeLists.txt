@@ -6,5 +6,6 @@ add_subdirectory(src)
 
 install(TARGETS htmltdcnt DESTINATION bin)
 
+enable_testing()
 add_test(NAME test1 COMMAND htmltdcnt --version)
 
