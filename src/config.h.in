@@ -1,0 +1,4 @@
+// the configured options and settings
+#define htmltdcnt_VERSION_MAJOR @htmltdcnt_VERSION_MAJOR@
+#define htmltdcnt_VERSION_MINOR @htmltdcnt_VERSION_MINOR@
+
