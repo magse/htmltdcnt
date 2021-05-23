@@ -15,6 +15,7 @@
 
 using namespace std;
 
+// options and program state
 struct options {
 	int quotation=0;
 	int trynumerical=0;
@@ -80,6 +81,7 @@ struct options {
 	}
 };
 
+// to test if cell data is a numerical value
 bool to_numerical(string& data) {
 	string str;
 	for(auto& c:data) {
@@ -97,6 +99,7 @@ bool to_numerical(string& data) {
 	return false;
 }
 
+// main print out
 void print_td(string& data,size_t Rcnt,size_t Dcnt,options& opt) {
 	if(data.length() && opt.R1<=Rcnt && Rcnt<=opt.R2 && opt.D1<=Dcnt && Dcnt<=opt.D2) {
 		cout << ",";
@@ -108,6 +111,7 @@ void print_td(string& data,size_t Rcnt,size_t Dcnt,options& opt) {
 		if(opt.quotation && !num) cout << "\"";
 	}
 }
+
 
 int main(int argc,char* argv[]) {
 	
