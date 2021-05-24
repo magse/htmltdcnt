@@ -7,6 +7,7 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
+#include <algorithm>
 
 #include <cassert>
 #include <cctype>
@@ -58,14 +59,16 @@ struct options {
 				if((a+1)>(argc-1)) return error_message(-1,"Missing rows specification");
 				a++;
 				string str=string(argv[a]);
-				for(auto& c:str) if(':'==c || ','==c) c=' ';
+				replace_if(begin(str),end(str),[](auto& c){return ':'==c || ','==c;},' ');
+//				for(auto& c:str) if(':'==c || ','==c) c=' ';
 				istringstream ss(str);
 				ss >> R1 >> R2;
 			} else if(!strcmp(argv[a], "-C") || !strcmp(argv[a], "--columns")) {
 				if((a+1)>(argc-1)) return error_message(-1,"Missing columns specification");
 				a++;
 				string str=string(argv[a]);
-				for(auto& c:str) if(':'==c || ','==c) c=' ';
+				replace_if(begin(str),end(str),[](auto& c){return ':'==c || ','==c;},' ');
+//				for(auto& c:str) if(':'==c || ','==c) c=' ';
 				istringstream ss(str);
 				ss >> D1 >> D2;
 			} else if(!strcmp(argv[a], "-i") || !strcmp(argv[a], "--input")) {
@@ -100,7 +103,7 @@ bool to_numerical(string& data) {
 }
 
 // main print out
-void print_td(string& data,size_t Rcnt,size_t Dcnt,options& opt) {
+void print_td(string& data,size_t Rcnt,size_t Dcnt,const options& opt) {
 	if(data.length() && opt.R1<=Rcnt && Rcnt<=opt.R2 && opt.D1<=Dcnt && Dcnt<=opt.D2) {
 		cout << ",";
 		if(opt.printindex) cout << "(" << Rcnt << "," << Dcnt << "):";
