@@ -59,7 +59,7 @@ struct options {
 				if((a+1)>(argc-1)) return error_message(-1,"Missing rows specification");
 				a++;
 				string str=string(argv[a]);
-				replace_if(begin(str),end(str),[](auto& c){return ':'==c || ','==c;},' ');
+				replace_if(begin(str),end(str),[](const auto& c){return ':'==c || ','==c;},' ');
 //				for(auto& c:str) if(':'==c || ','==c) c=' ';
 				istringstream ss(str);
 				ss >> R1 >> R2;
@@ -67,7 +67,7 @@ struct options {
 				if((a+1)>(argc-1)) return error_message(-1,"Missing columns specification");
 				a++;
 				string str=string(argv[a]);
-				replace_if(begin(str),end(str),[](auto& c){return ':'==c || ','==c;},' ');
+				replace_if(begin(str),end(str),[](const auto& c){return ':'==c || ','==c;},' ');
 //				for(auto& c:str) if(':'==c || ','==c) c=' ';
 				istringstream ss(str);
 				ss >> D1 >> D2;
@@ -94,7 +94,8 @@ bool to_numerical(string& data) {
 		if('G'==c || c=='g') str+=c;
 		if('.'==c || c==',') str+='.';
 	}
-	auto x=atof(str.c_str());
+	long double x=strtold(str.c_str(),nullptr);
+//	auto x=atof(str.c_str());
 	if(isnormal(x)) {
 		data=str;
 		return true;
